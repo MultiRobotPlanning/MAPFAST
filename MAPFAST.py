@@ -172,7 +172,7 @@ class MAPFAST:
 					new_image, new_start, new_goal = get_transition(img, start, goal, self.map_details[kk], int(_.split('_')[-1]))
 					new_image = np.transpose(new_image, (2, 0, 1))
 				else:
-					with np.load(inp_loc + kk[:-4] + 'npz') as fi:
+					with np.load(self.input_location + kk[:-4] + 'npz') as fi:
 						img = fi.f.arr_0
 					img.resize((3, 320, 320))
 					start = self.agent_details[kk]['starts']
