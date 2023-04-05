@@ -44,6 +44,7 @@ def parse_json(map_file : str, agent_file : str):
         map["name"] = map_name
         map["dim"] = val["mp_dim"]
         map["num_agents"] = val["no_agents"]
+        map["filename"] = key
         map_dicts.append(map)
 
         scene_name += scene_ext

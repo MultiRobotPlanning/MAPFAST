@@ -1,6 +1,7 @@
 import os
 import subprocess
 from parse_json import parse_json
+from timeit import default_timer as timer
 
 map_file = "json_files/solved_map_details.json"
 agent_file = "json_files/solved_agent_details.json"
@@ -49,7 +50,8 @@ def write_to_scene(scene_file : str, map_dict : dict, starts_goals : dict):
 
 # main loop
 planners = ["ecbs", "eecbs", "pbs"]
-timeout = 300
+subprocess_timeout = 300
+planner_timeout = subprocess_timeout * 2
 suboptimality = 1.2
 for idx in range(len(map_dicts)):
     map_dict = map_dicts[idx]
@@ -59,6 +61,8 @@ for idx in range(len(map_dicts)):
     # create scene file
     write_to_scene(scene_file, map_dict, starts_goals[idx])
 
+    # dict to pass to output script
+    output_dict = dict()
     # call planners
     for planner in planners:
         # global path required since output folder is outside planning directory
@@ -78,7 +82,7 @@ for idx in range(len(map_dicts)):
         # number of agents
         planner_call.extend(["-k", str(map_dict["num_agents"])])
         # timeout
-        planner_call.extend(["-t", str(timeout)])
+        planner_call.extend(["-t", str(planner_timeout)])
 
         if planner == "eecbs" or planner == "ecbs":
             planner_call.extend(["--suboptimality=" + str(suboptimality)])
@@ -90,6 +94,13 @@ for idx in range(len(map_dicts)):
             # change high level search for ECBS
             planner_call.extend(["--highLevelSolver=" + "A*eps"])
 
-        subprocess.call(planner_call, cwd=planner_cwd)
+        start = timer()
+        process = subprocess.run(planner_call, cwd=planner_cwd, timeout=subprocess_timeout)
+        time_taken = timer() - start
+        planner_success = process.returncode
 
-    # store planner outputs in jsons
+        output_dict["filename"] = map_dict["filename"]
+        output_dict[planner] = time_taken if (planner_success == 1) else -1
+
+    # call output script with output_dict as arg
+    break

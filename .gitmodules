@@ -1,8 +1,0 @@
-[submodule "EECBS"]
-	path = EECBS
-	url = git@github.com:Jiaoyang-Li/EECBS.git
-	ignore = dirty
-[submodule "PBS"]
-	path = PBS
-	url = git@github.com:Jiaoyang-Li/PBS.git
-	ignore = dirty
