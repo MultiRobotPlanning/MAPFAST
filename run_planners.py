@@ -1,6 +1,7 @@
 import os
 import subprocess
 from parse_json import parse_json
+from output_json import output_json
 from timeit import default_timer as timer
 
 map_file = "json_files/solved_map_details.json"
@@ -22,7 +23,8 @@ cwd = os.getcwd() + "/"
 # map directory
 map_dir = cwd + "mapf-map/"
 
-def write_to_scene(scene_file : str, map_dict : dict, starts_goals : dict):
+
+def write_to_scene(scene_file: str, map_dict: dict, starts_goals: dict):
     starts = starts_goals["starts"]
     goals = starts_goals["goals"]
     bucket = 1
@@ -34,7 +36,7 @@ def write_to_scene(scene_file : str, map_dict : dict, starts_goals : dict):
             # bucket number
             line = str(bucket) + tab
             # map name
-            line += (map_dict["name"] + tab)
+            line += map_dict["name"] + tab
             # map width
             line += str(map_dict["dim"][0]) + tab
             # map height
@@ -47,6 +49,7 @@ def write_to_scene(scene_file : str, map_dict : dict, starts_goals : dict):
             line += str(optimal_length) + "\n"
 
             file.writelines([line])
+
 
 # main loop
 planners = ["ecbs", "eecbs", "pbs"]
@@ -95,12 +98,23 @@ for idx in range(len(map_dicts)):
             planner_call.extend(["--highLevelSolver=" + "A*eps"])
 
         start = timer()
-        process = subprocess.run(planner_call, cwd=planner_cwd, timeout=subprocess_timeout)
+        process = subprocess.run(
+            planner_call, cwd=planner_cwd, timeout=subprocess_timeout
+        )
         time_taken = timer() - start
         planner_success = process.returncode
 
         output_dict["filename"] = map_dict["filename"]
         output_dict[planner] = time_taken if (planner_success == 1) else -1
-
+    print(output_dict)
+    map_name = output_dict["filename"]
+    best_solver = "EECBS"
+    eecbs_time = output_dict["eecbs"]
+    eecbs_cost = 2.1
+    ecbs_time = output_dict["ecbs"]
+    ecbs_cost = 41.2
+    pbs_time = output_dict["pbs"]
+    pbs_cost = 12.2
+    output_json(map_name, best_solver, eecbs_time, eecbs_cost, ecbs_time, ecbs_cost, pbs_time, pbs_cost)
     # call output script with output_dict as arg
     break
