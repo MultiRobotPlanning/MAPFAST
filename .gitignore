@@ -144,3 +144,19 @@ cython_debug/
 
 scenes/
 planner_outputs/
+
+EECBS/CMakeCache.txt
+EECBS/CMakeFiles/
+EECBS/Makefile
+EECBS/cmake_install.cmake
+EECBS/eecbs
+EECBS/.idea
+EECBS/cmake-*
+
+PBS/CMakeCache.txt
+PBS/CMakeFiles/
+PBS/Makefile
+PBS/pbs
+PBS/cmake*
+PBS/.idea
+PBS/*.csv
