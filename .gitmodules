@@ -1,6 +1,1 @@
-[submodule "EECBS"]
-	path = EECBS
-	url = git@github.com:Jiaoyang-Li/EECBS.git
-[submodule "PBS"]
-	path = PBS
-	url = git@github.com:Jiaoyang-Li/PBS.git
+
