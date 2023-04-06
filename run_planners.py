@@ -53,10 +53,8 @@ def write_to_scene(scene_file: str, map_dict: dict, starts_goals: dict):
 
 # main loop
 planners = ["ecbs", "eecbs", "pbs"]
-# subprocess_timeout = 300
-subprocess_timeout = 305
+subprocess_timeout = 300
 planner_timeout = 300
-# planner_timeout = subprocess_timeout * 2
 suboptimality = 1.2
 for idx in range(0,len(map_dicts)):
     print(str(idx) + '/' + str(len(map_dicts)))
@@ -120,7 +118,7 @@ for idx in range(0,len(map_dicts)):
             output_dict[planner.upper()] = time_taken
             output_dict[planner + "_cost"] = cost
             # check best solver
-            if(time_taken < min_time):
+            if(time_taken < min_time): # TODO: Add a cost criteria for best solver
                 best_solver = planner.upper()
                 min_time = time_taken
         else:
@@ -128,14 +126,7 @@ for idx in range(0,len(map_dicts)):
             output_dict[planner + "_cost"] = -1
 
     map_name = map_dict["filename"]
-    output_dict["SOLVER"] = best_solver 
+    output_dict["SOLVER"] = best_solver
     # call output script
     output_json(map_name, output_dict)
-    # eecbs_time = output_dict["eecbs_time"]
-    # eecbs_cost = output_dict["eecbs_cost"]
-    # ecbs_time = output_dict["ecbs_time"]
-    # ecbs_cost = output_dict["ecbs_cost"]
-    # pbs_time = output_dict["pbs_time"]
-    # pbs_cost = output_dict["pbs_cost"]
-    # output_json(map_name, best_solver, eecbs_time, eecbs_cost, ecbs_time, ecbs_cost, pbs_time, pbs_cost)
     # break

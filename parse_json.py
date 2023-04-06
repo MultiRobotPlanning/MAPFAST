@@ -21,9 +21,11 @@ def parse_json(map_file : str, agent_file : str):
     starts_goals = []
 
     for key, val in map_details.items():
+        add_prefix = False
         # remove "new_" prefix
         if key.startswith(prefix):
             key = key[len(prefix):]
+            add_prefix = True
 
         assert ("-random" in key or "-even" in key), "random/even not in key"
 
@@ -44,7 +46,7 @@ def parse_json(map_file : str, agent_file : str):
         map["name"] = map_name
         map["dim"] = val["mp_dim"]
         map["num_agents"] = val["no_agents"]
-        map["filename"] = key
+        map["filename"] = prefix + key if add_prefix else key
         map_dicts.append(map)
 
         scene_name += scene_ext
