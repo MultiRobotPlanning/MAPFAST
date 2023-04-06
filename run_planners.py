@@ -53,10 +53,13 @@ def write_to_scene(scene_file: str, map_dict: dict, starts_goals: dict):
 
 # main loop
 planners = ["ecbs", "eecbs", "pbs"]
-subprocess_timeout = 300
-planner_timeout = subprocess_timeout * 2
+# subprocess_timeout = 300
+subprocess_timeout = 305
+planner_timeout = 300
+# planner_timeout = subprocess_timeout * 2
 suboptimality = 1.2
-for idx in range(len(map_dicts)):
+for idx in range(0,len(map_dicts)):
+    print(str(idx) + '/' + str(len(map_dicts)))
     map_dict = map_dicts[idx]
     scene_name = scene_names[idx]
     scene_file = scene_dir + scene_names[idx]
@@ -67,7 +70,7 @@ for idx in range(len(map_dicts)):
     # dict to pass to output script
     output_dict = dict()
     min_time = planner_timeout
-    best_solver = "EECBS" # TODO decide best planner
+    best_solver = "EECBS" 
     # call planners
     for planner in planners:
         # global path required since output folder is outside planning directory
@@ -98,16 +101,18 @@ for idx in range(len(map_dicts)):
         if planner == "ecbs":
             # change high level search for ECBS
             planner_call.extend(["--highLevelSolver=" + "A*eps"])
-
-        process = subprocess.run(
-            planner_call, cwd=planner_cwd, timeout=subprocess_timeout, stdout=subprocess.PIPE
-        )
-
-        planner_success = process.returncode
+        try:
+            process = subprocess.run(
+                planner_call, cwd=planner_cwd, timeout=subprocess_timeout, stdout=subprocess.PIPE
+            )
+            planner_success = process.returncode
+        except subprocess.TimeoutExpired: 
+            print("caught subprocess timeout error")
+            planner_success = -1
 
         if(planner_success == 1):
             planner_output = (process.stdout).decode()
-            print(planner_output)
+            # print(planner_output)
             planner_output = planner_output.split(':')[1]
             planner_output = planner_output.split(',')
             time_taken = float(planner_output[2])
@@ -123,7 +128,7 @@ for idx in range(len(map_dicts)):
             output_dict[planner + "_cost"] = -1
 
     map_name = map_dict["filename"]
-    output_dict["SOLVER"] = best_solver # TODO decide best planner
+    output_dict["SOLVER"] = best_solver 
     # call output script
     output_json(map_name, output_dict)
     # eecbs_time = output_dict["eecbs_time"]
