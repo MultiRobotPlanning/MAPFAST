@@ -109,8 +109,8 @@ for idx in range(len(map_dicts)):
         # time_taken = timer() - start
         time_taken = float(planner_output[2])
         cost = int(planner_output[1])
-        # planner_success = process.returncode
-        planner_success = 1 if (planner_output[0] == ' Succeed') else 0
+        planner_success = process.returncode
+        # planner_success = 1 if (planner_output[0] == ' Succeed') else 0
 
         output_dict["filename"] = map_dict["filename"]
         output_dict[planner + "_time"] = time_taken if (planner_success == 1) else -1
