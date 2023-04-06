@@ -2,7 +2,8 @@ import json
 import os
 
 
-def output_json(map_name: str, best_solver: str, eecbs_time: float, eecbs_cost: float, ecbs_time: float, ecbs_cost: float, pbs_time: float, pbs_cost: float):
+# def output_json(map_name: str, best_solver: str, eecbs_time: float, eecbs_cost: float, ecbs_time: float, ecbs_cost: float, pbs_time: float, pbs_cost: float):
+def output_json(map_name: str, output_dict : dict):
     data = {}
     if not os.path.exists("sample.json"):
         json_object = json.dumps(data)
@@ -28,15 +29,18 @@ def output_json(map_name: str, best_solver: str, eecbs_time: float, eecbs_cost: 
     # x = {
     #   map_name: {"SOLVER": best_solver, "eecbs_time": eecbs_time, "eecbs_cost": eecbs_cost, "ecbs_time": ecbs_time, "ecbs_cost": ecbs_cost, "pbs_time": pbs_time, "pbs_cost": pbs_cost}
     # }
-    data[map_name] = {
-        "SOLVER": best_solver,
-        "eecbs_time": eecbs_time,
-        "eecbs_cost": eecbs_cost,
-        "ecbs_time": ecbs_time,
-        "ecbs_cost": ecbs_cost,
-        "pbs_time": pbs_time,
-        "pbs_cost": pbs_cost,
-    }
+
+    data[map_name] = output_dict.copy()
+
+    # data[map_name] = {
+    #     "SOLVER": best_solver,
+    #     "EECBS": eecbs_time,
+    #     "eecbs_cost": eecbs_cost,
+    #     "ECBS": ecbs_time,
+    #     "ecbs_cost": ecbs_cost,
+    #     "PBS": pbs_time,
+    #     "pbs_cost": pbs_cost,
+    # }
 
     # convert into JSON:
     json_object = json.dumps(data)

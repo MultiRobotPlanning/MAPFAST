@@ -160,3 +160,5 @@ PBS/pbs
 PBS/cmake*
 PBS/.idea
 PBS/*.csv
+
+sample.json
