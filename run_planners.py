@@ -99,22 +99,31 @@ for idx in range(len(map_dicts)):
 
         start = timer()
         process = subprocess.run(
-            planner_call, cwd=planner_cwd, timeout=subprocess_timeout
+            planner_call, cwd=planner_cwd, timeout=subprocess_timeout, stdout=subprocess.PIPE
         )
-        time_taken = timer() - start
-        planner_success = process.returncode
+        planner_output = (process.stdout).decode()
+        # print(planner_output)
+        planner_output = planner_output.split(':')[1]
+        planner_output = planner_output.split(',')
+        # print(planner_output)
+        # time_taken = timer() - start
+        time_taken = float(planner_output[2])
+        cost = int(planner_output[1])
+        # planner_success = process.returncode
+        planner_success = 1 if (planner_output[0] == ' Succeed') else 0
 
         output_dict["filename"] = map_dict["filename"]
-        output_dict[planner] = time_taken if (planner_success == 1) else -1
+        output_dict[planner + "_time"] = time_taken if (planner_success == 1) else -1
+        output_dict[planner + "_cost"] = cost if (planner_success == 1) else -1
     print(output_dict)
     map_name = output_dict["filename"]
-    best_solver = "EECBS"
-    eecbs_time = output_dict["eecbs"]
-    eecbs_cost = 2.1
-    ecbs_time = output_dict["ecbs"]
-    ecbs_cost = 41.2
-    pbs_time = output_dict["pbs"]
-    pbs_cost = 12.2
+    best_solver = "EECBS"  # TODO decide best planner
+    eecbs_time = output_dict["eecbs_time"]
+    eecbs_cost = output_dict["eecbs_cost"]
+    ecbs_time = output_dict["ecbs_time"]
+    ecbs_cost = output_dict["ecbs_cost"]
+    pbs_time = output_dict["pbs_time"]
+    pbs_cost = output_dict["pbs_cost"]
     output_json(map_name, best_solver, eecbs_time, eecbs_cost, ecbs_time, ecbs_cost, pbs_time, pbs_cost)
     # call output script with output_dict as arg
     break
