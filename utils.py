@@ -67,7 +67,7 @@ class InceptionClassificationNet(nn.Module):
 
 	Returns: None
 	'''
-	def __init__(self, cl_units=True, fin_pred_units=True, pair_units=True, input_d=3, solvers=4):
+	def __init__(self, cl_units=True, fin_pred_units=True, pair_units=True, input_d=3, solvers=3):
 		super(InceptionClassificationNet, self).__init__()
 
 		self.cl_units = cl_units

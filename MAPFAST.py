@@ -174,7 +174,8 @@ class MAPFAST:
 				else:
 					with np.load(self.input_location + kk[:-4] + 'npz') as fi:
 						img = fi.f.arr_0
-					img.resize((3, 320, 320))
+					# img.resize((3, 320, 320))
+					img = np.resize(img,(3, 320, 320))
 					start = self.agent_details[kk]['starts']
 					goal = self.agent_details[kk]['goals']
 					new_image, new_start, new_goal = get_transition(img, start, goal, self.map_details[kk], int(_.split('_')[-1]))
