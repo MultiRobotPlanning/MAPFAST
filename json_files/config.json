@@ -1,11 +1,11 @@
 {
 	"Training":{
-		"yaml_details": "json_files/solved_yaml_details_run1.json",
-		"agent_details": "json_files/solved_agent_details_run1.json",
-		"map_details": "json_files/solved_map_details_run1.json",
+		"yaml_details": "json_files/solved_yaml_details_run2.json",
+		"agent_details": "json_files/solved_agent_details_run2.json",
+		"map_details": "json_files/solved_map_details_run2.json",
 		"test_details": "",
 		"augmentation": 1,
-		"batch_size": 12,
+		"batch_size": 20,
 		"epochs": 10,
 		"log_interval": 1000,
 		"is_image": 0,
@@ -13,28 +13,28 @@
 		"output_units": {"cl": 1, "fin": 1, "pair": 1},
 		"model_loc": "model_weights/",
 		"model_name": "sp_320_14_units",
-		"mapping": {"ECBS":0, "EECBS":2, "PBS":1}
+		"mapping": {"ECBS1_2":0, "EECBS1_2":1, "PBS":2, "ECBS1_1":3, "EECBS1_1":4, "LNS":5, "ECBS1_02":6, "EECBS1_02":7}
 	},
 	"Testing":{
-		"yaml_details": "json_files/solved_yaml_details_run1.json",
-		"agent_details": "json_files/solved_agent_details_run1.json",
-		"map_details": "json_files/solved_map_details_run1.json",
+		"yaml_details": "json_files/solved_yaml_details_run2.json",
+		"agent_details": "json_files/solved_agent_details_run2.json",
+		"map_details": "json_files/solved_map_details_run2.json",
 		"test_details": "",
 		"augmentation": 1,
-		"batch_size": 12,
+		"batch_size": 24,
 		"is_image": 0,
 		"input_location": "numpy_shortest_path_compressed/",
 		"output_units": {"cl": 1, "fin": 1, "pair": 1},
 		"model_loc": "model_weights/",
-		"model_name": "model_sp_320_14_units_epoch_1.pth",
+		"model_name": "model_sp_320_14_units_epoch_9.pth",
 		"prediction_output": "json_files/y_pred_true_sp_320_14.json",
-		"mapping": {"ECBS":0, "EECBS":2, "PBS":1}
+		"mapping": {"ECBS1_2":0, "EECBS1_2":1, "PBS":2, "ECBS1_1":3, "EECBS1_1":4, "LNS":5, "ECBS1_02":6, "EECBS1_02":7}
 	},
 	"Analysis":{
-		"yaml_details": "json_files/solved_yaml_details_run1.json",
-		"agent_details": "json_files/solved_agent_details_run1.json",
-		"map_details": "json_files/solved_map_details_run1.json",
+		"yaml_details": "json_files/solved_yaml_details_run2.json",
+		"agent_details": "json_files/solved_agent_details_run2.json",
+		"map_details": "json_files/solved_map_details_run2.json",
 		"prediction_output": "json_files/y_pred_true_sp_320_14.json",
-		"mapping": {"ECBS":0, "EECBS":2, "PBS":1}
+		"mapping": {"ECBS1_2":0, "EECBS1_2":1, "PBS":2, "ECBS1_1":3, "EECBS1_1":4, "LNS":5, "ECBS1_02":6, "EECBS1_02":7}
 	}
 }

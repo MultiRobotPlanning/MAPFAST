@@ -253,7 +253,7 @@ class MAPFAST:
 				losses = []
 				if cl_units:
 					out1 = outs['cl']
-					Y1_to = torch.tensor(Y1).to(self.device)
+					Y1_to = torch.tensor(Y1).to(self.device, dtype=torch.long)
 					loss1 = criterion1(out1, Y1_to)
 					losses.append(loss1)
 					del Y1_to
@@ -305,7 +305,7 @@ class MAPFAST:
 
 						if cl_units:
 							Lout1 = Louts['cl']
-							L1_to = torch.tensor(L1).to(self.device)
+							L1_to = torch.tensor(L1).to(self.device, dtype=torch.long)
 							valid_losses.append(criterion1(Lout1, L1_to).item())
 							del Louts['cl']
 							del Lout1
@@ -413,7 +413,7 @@ class MAPFAST:
 				if fin_pred_units:
 					temp_sig = sig(temp_out2[i]).numpy()
 					temp_sig_1 = 1 - temp_sig
-					for _ in range(4):
+					for _ in range(3):
 						val = 0
 						if temp_sig[_] >= temp_sig_1[_]:
 							val = 1
@@ -422,7 +422,7 @@ class MAPFAST:
 				if pair_units:
 					temp_sig_2 = sig(temp_out3[i]).numpy()
 					temp_sig_2_1 = 1 - temp_sig_2
-					for _ in range(6):
+					for _ in range(3):
 						val = 0
 						if temp_sig_2[_] >= temp_sig_2_1[_]:
 							val = 1
