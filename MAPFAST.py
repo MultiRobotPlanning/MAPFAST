@@ -421,7 +421,7 @@ class MAPFAST:
 				if fin_pred_units:
 					temp_sig = sig(temp_out2[i]).numpy()
 					temp_sig_1 = 1 - temp_sig
-					for _ in range(3):
+					for _ in range(8):
 						val = 0
 						if temp_sig[_] >= temp_sig_1[_]:
 							val = 1
@@ -430,7 +430,7 @@ class MAPFAST:
 				if pair_units:
 					temp_sig_2 = sig(temp_out3[i]).numpy()
 					temp_sig_2_1 = 1 - temp_sig_2
-					for _ in range(3):
+					for _ in range(28):
 						val = 0
 						if temp_sig_2[_] >= temp_sig_2_1[_]:
 							val = 1
