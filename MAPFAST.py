@@ -233,6 +233,7 @@ class MAPFAST:
 			create_model_weights(model_loc)
 		
 		self.num_solvers = len(self.mapping)
+		self.num_pairs = int((self.num_solvers/2) * (self.num_solvers - 1))
 		net = InceptionClassificationNet(cl_units, fin_pred_units, pair_units, solvers = self.num_solvers)
 		net.to(self.device)
 		
@@ -421,7 +422,7 @@ class MAPFAST:
 				if fin_pred_units:
 					temp_sig = sig(temp_out2[i]).numpy()
 					temp_sig_1 = 1 - temp_sig
-					for _ in range(3):
+					for _ in range(self.num_solvers):
 						val = 0
 						if temp_sig[_] >= temp_sig_1[_]:
 							val = 1
@@ -430,7 +431,7 @@ class MAPFAST:
 				if pair_units:
 					temp_sig_2 = sig(temp_out3[i]).numpy()
 					temp_sig_2_1 = 1 - temp_sig_2
-					for _ in range(3):
+					for _ in range(self.num_pairs):
 						val = 0
 						if temp_sig_2[_] >= temp_sig_2_1[_]:
 							val = 1
