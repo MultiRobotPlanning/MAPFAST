@@ -117,15 +117,22 @@ class MAPFAST:
 		solvers_time = []
 		for i in self.mapping:
 			t = 400
+			c = 500000
 			if di[i] != -1:
 				t = di[i]
-			solvers_time.append(t)
+				c = di[i+'_cost']
+			solvers_time.append((t,c))
 
 		y3 = []
 		for i in range(len(solvers_time)-1):
 			for j in range(i+1, len(solvers_time)):
-				y3.append(float(solvers_time[i] <= solvers_time[j]))
-
+				if(solvers_time[i][0] < solvers_time[j][0]):
+					y3.append(float(1))
+				elif (solvers_time[i][0] > solvers_time[j][0]):
+					y3.append(float(0))
+				else:
+					y3.append(float(solvers_time[i] <= solvers_time[j]))
+		
 		y3 = asarray(y3)
 
 		return y3
@@ -225,7 +232,8 @@ class MAPFAST:
 		if model_loc:
 			create_model_weights(model_loc)
 		
-		net = InceptionClassificationNet(cl_units, fin_pred_units, pair_units)
+		self.num_solvers = len(self.mapping)
+		net = InceptionClassificationNet(cl_units, fin_pred_units, pair_units, solvers = self.num_solvers)
 		net.to(self.device)
 		
 		if cl_units:
