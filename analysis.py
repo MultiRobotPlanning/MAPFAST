@@ -103,7 +103,7 @@ def print_util(yaml_details, Y_prediction_data, solver_types=None):
 	jj = find_count(yaml_details, list(Y_prediction_data.keys()), solvers)
 
 	print(st)
-	print('\tfast:', '\n\t\tcount:', len(jj['fast'][0]), '\n\t\tpercentage:', jj['fast'][1])
+	print('\tbest:', '\n\t\tcount:', len(jj['fast'][0]), '\n\t\tpercentage:', jj['fast'][1])
 	print('\tsolved:', '\n\t\tcount:', len(jj['solved'][0]), '\n\t\tpercentage:', jj['solved'][1])
 	return solvers
 
@@ -138,7 +138,6 @@ if __name__ == '__main__':
 	print_util(yaml_details, Y_prediction_data, ['LNS'])
 	print_util(yaml_details, Y_prediction_data, ['ECBS1_02'])
 	print_util(yaml_details, Y_prediction_data, ['EECBS1_02'])
-	# print_util(yaml_details, Y_prediction_data, ['SAT'])
 	s = print_util(yaml_details, Y_prediction_data)
 	print('\nTotal Runtime:')
 	print('ECBS1_2:', calculate_time(yaml_details, inv_mapping, list(Y_prediction_data.keys()), [mapping['ECBS1_2']]*len(Y_prediction_data)))
@@ -149,7 +148,6 @@ if __name__ == '__main__':
 	print('LNS:', calculate_time(yaml_details, inv_mapping, list(Y_prediction_data.keys()), [mapping['LNS']]*len(Y_prediction_data)))
 	print('ECBS1_02:', calculate_time(yaml_details, inv_mapping, list(Y_prediction_data.keys()), [mapping['ECBS1_02']]*len(Y_prediction_data)))
 	print('EECBS1_02:', calculate_time(yaml_details, inv_mapping, list(Y_prediction_data.keys()), [mapping['EECBS1_02']]*len(Y_prediction_data)))
-	# print('SAT:', calculate_time(yaml_details, inv_mapping, list(Y_prediction_data.keys()), [mapping['SAT']]*len(Y_prediction_data)))
 	print('Our Model:', calculate_time(yaml_details, inv_mapping, list(Y_prediction_data.keys()), [i[0] for i in s]))
 	print('Optimal:', calculate_time(yaml_details, inv_mapping, list(Y_prediction_data.keys())))
 

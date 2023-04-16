@@ -117,7 +117,7 @@ class MAPFAST:
 		solvers_time = []
 		for i in self.mapping:
 			t = 400
-			c = 500000
+			c = float("Inf")
 			if di[i] != -1:
 				t = di[i]
 				c = di[i+'_cost']
@@ -126,12 +126,12 @@ class MAPFAST:
 		y3 = []
 		for i in range(len(solvers_time)-1):
 			for j in range(i+1, len(solvers_time)):
-				if(solvers_time[i][0] < solvers_time[j][0]):
+				if(solvers_time[i][1] < solvers_time[j][1]):
 					y3.append(float(1))
-				elif (solvers_time[i][0] > solvers_time[j][0]):
+				elif (solvers_time[i][1] > solvers_time[j][1]):
 					y3.append(float(0))
 				else:
-					y3.append(float(solvers_time[i] <= solvers_time[j]))
+					y3.append(float(solvers_time[i][0] <= solvers_time[j][0]))
 		
 		y3 = asarray(y3)
 
@@ -371,12 +371,13 @@ class MAPFAST:
 			If the model has finish prediction neurons, the json will have key with name of solver and value [predicted value, ground truth](a list)
 			If the model has pairwise classification neurons, the json will have a key as number(corresponsing to the index values of computer_y3) and the value is predicted answer(an integer)
 		'''
-		
+		self.num_solvers = len(self.mapping)
+		self.num_pairs = int((self.num_solvers/2) * (self.num_solvers - 1))
 		test_steps = (len(test_list) + batch_size + 1) // batch_size
 
 		test_datagen = self.data_generator(test_list, batch_size)
 
-		net = InceptionClassificationNet(cl_units, fin_pred_units, pair_units)
+		net = InceptionClassificationNet(cl_units, fin_pred_units, pair_units, solvers = self.num_solvers)
 		net.to(self.device)
 
 		net.load_state_dict(torch.load(model_loc + model_name, map_location=torch.device(self.device)))

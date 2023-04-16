@@ -7,9 +7,9 @@ yaml_file3 = "sample3.json"
 map_file = "json_files/solved_map_details.json"
 agent_file = "json_files/solved_agent_details.json"
 
-yaml_file_out = "json_files/solved_yaml_details_run2.json"
-map_file_out = "json_files/solved_map_details_run2.json"
-agent_file_out = "json_files/solved_agent_details_run2.json"
+yaml_file_out = "json_files/solved_yaml_details_run3.json"
+map_file_out = "json_files/solved_map_details_run3.json"
+agent_file_out = "json_files/solved_agent_details_run3.json"
 
 yaml_details1 = json.load(open(yaml_file1))
 yaml_details2 = json.load(open(yaml_file2))
@@ -36,22 +36,23 @@ for key, val in map_details.items():
     run_details1 = yaml_details1[new_name]
     run_details2 = yaml_details2[key]
     run_details3 = yaml_details3[key]
-    if (run_details1["ECBS"] == -1 and run_details1["EECBS"] == -1 and run_details1["PBS"] == -1 and run_details2["ECBS"] == -1 and run_details2["EECBS"] == -1 and run_details2["LNS"] == -1 and run_details3["ECBS"] == -1 and run_details3["EECBS"] == -1):
+    # if (run_details1["ECBS"] == -1 and run_details1["EECBS"] == -1 and run_details1["PBS"] == -1 and run_details2["ECBS"] == -1 and run_details2["EECBS"] == -1 and run_details2["LNS"] == -1 and run_details3["ECBS"] == -1 and run_details3["EECBS"] == -1):
+    if (run_details1["PBS"] == -1 and run_details2["LNS"] == -1 and run_details3["ECBS"] == -1 and run_details3["EECBS"] == -1):
         # yaml_details_out.pop(new_name)
         map_details_out.pop(key)
         agent_details_out.pop(key)    
         continue
     run_details = {}
-    run_details["ECBS1_2"] = run_details1["ECBS"]
-    run_details["ECBS1_2_cost"] = run_details1["ecbs_cost"]
-    run_details["EECBS1_2"] = run_details1["EECBS"]
-    run_details["EECBS1_2_cost"] = run_details1["eecbs_cost"]
+    # run_details["ECBS1_2"] = run_details1["ECBS"]
+    # run_details["ECBS1_2_cost"] = run_details1["ecbs_cost"]
+    # run_details["EECBS1_2"] = run_details1["EECBS"]
+    # run_details["EECBS1_2_cost"] = run_details1["eecbs_cost"]
     run_details["PBS"] = run_details1["PBS"]
     run_details["PBS_cost"] = run_details1["pbs_cost"]
-    run_details["ECBS1_1"] = run_details2["ECBS"]
-    run_details["ECBS1_1_cost"] = run_details2["ecbs_cost"]
-    run_details["EECBS1_1"] = run_details2["EECBS"]
-    run_details["EECBS1_1_cost"] = run_details2["eecbs_cost"]
+    # run_details["ECBS1_1"] = run_details2["ECBS"]
+    # run_details["ECBS1_1_cost"] = run_details2["ecbs_cost"]
+    # run_details["EECBS1_1"] = run_details2["EECBS"]
+    # run_details["EECBS1_1_cost"] = run_details2["eecbs_cost"]
     run_details["LNS"] = run_details2["LNS"]
     run_details["LNS_cost"] = run_details2["lns_cost"]
     run_details["ECBS1_02"] = run_details3["ECBS"]
