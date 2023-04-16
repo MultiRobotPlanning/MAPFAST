@@ -126,12 +126,12 @@ class MAPFAST:
 		y3 = []
 		for i in range(len(solvers_time)-1):
 			for j in range(i+1, len(solvers_time)):
-				if(solvers_time[i][0] < solvers_time[j][0]):
+				if(solvers_time[i][1] < solvers_time[j][1]):
 					y3.append(float(1))
-				elif (solvers_time[i][0] > solvers_time[j][0]):
+				elif (solvers_time[i][1] > solvers_time[j][1]):
 					y3.append(float(0))
 				else:
-					y3.append(float(solvers_time[i] <= solvers_time[j]))
+					y3.append(float(solvers_time[i][0] <= solvers_time[j][0]))
 		
 		y3 = asarray(y3)
 
