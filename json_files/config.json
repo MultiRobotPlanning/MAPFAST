@@ -1,8 +1,8 @@
 {
 	"Training":{
-		"yaml_details": "json_files/solved_yaml_details4.json",
-		"agent_details": "json_files/solved_agent_details4.json",
-		"map_details": "json_files/solved_map_details4.json",
+		"yaml_details": "json_files/solved_yaml_details_run4.json",
+		"agent_details": "json_files/solved_agent_details_run4.json",
+		"map_details": "json_files/solved_map_details_run4.json",
 		"test_details": "",
 		"augmentation": 1,
 		"batch_size": 20,
@@ -16,9 +16,9 @@
 		"mapping": {"BCP":0, "CBS":1, "PBS":2, "CBSH":3, "LNS":4, "ECBS1_02":5, "EECBS1_02":6}
 	},
 	"Testing":{
-		"yaml_details": "json_files/solved_yaml_details4.json",
-		"agent_details": "json_files/solved_agent_details4.json",
-		"map_details": "json_files/solved_map_details4.json",
+		"yaml_details": "json_files/solved_yaml_details_run4.json",
+		"agent_details": "json_files/solved_agent_details_run4.json",
+		"map_details": "json_files/solved_map_details_run4.json",
 		"test_details": "",
 		"augmentation": 1,
 		"batch_size": 24,
@@ -31,9 +31,9 @@
 		"mapping": {"BCP":0, "CBS":1, "PBS":2, "CBSH":3, "LNS":4, "ECBS1_02":5, "EECBS1_02":6}
 	},
 	"Analysis":{
-		"yaml_details": "json_files/solved_yaml_details4.json",
-		"agent_details": "json_files/solved_agent_details4.json",
-		"map_details": "json_files/solved_map_details4.json",
+		"yaml_details": "json_files/solved_yaml_details_run4.json",
+		"agent_details": "json_files/solved_agent_details_run4.json",
+		"map_details": "json_files/solved_map_details_run4.json",
 		"prediction_output": "json_files/y_pred_true_sp_320_14.json",
 		"mapping": {"BCP":0, "CBS":1, "PBS":2, "CBSH":3, "LNS":4, "ECBS1_02":5, "EECBS1_02":6}
 	}
