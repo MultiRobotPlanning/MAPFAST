@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-C', '--config', default='json_files/config.json', help='Give the location of config.json file')
-	parser.add_argument('-T', '--type', default=0, help='Training => 1, Testing => 0')
+	parser.add_argument('-T', '--type', default=1, help='Training => 1, Testing => 0')
 	args = parser.parse_args()
 
 	config = read_json(args.config)

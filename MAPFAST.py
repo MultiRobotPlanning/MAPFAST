@@ -115,24 +115,35 @@ class MAPFAST:
 		di = self.yaml_details[file_name]
 
 		solvers_time = []
+		# for i in self.mapping:
+		# 	t = 400
+		# 	c = float("Inf")
+		# 	if di[i] != -1:
+		# 		t = di[i]
+		# 		c = di[i+'_cost']
+		# 	solvers_time.append((t,c))
+
+		# y3 = []
+		# for i in range(len(solvers_time)-1):
+		# 	for j in range(i+1, len(solvers_time)):
+		# 		if(solvers_time[i][1] < solvers_time[j][1]):
+		# 			y3.append(float(1))
+		# 		elif (solvers_time[i][1] > solvers_time[j][1]):
+		# 			y3.append(float(0))
+		# 		else:
+		# 			y3.append(float(solvers_time[i][0] <= solvers_time[j][0]))
+				
 		for i in self.mapping:
 			t = 400
-			c = float("Inf")
 			if di[i] != -1:
 				t = di[i]
-				c = di[i+'_cost']
-			solvers_time.append((t,c))
+			solvers_time.append(t)
 
 		y3 = []
 		for i in range(len(solvers_time)-1):
 			for j in range(i+1, len(solvers_time)):
-				if(solvers_time[i][1] < solvers_time[j][1]):
-					y3.append(float(1))
-				elif (solvers_time[i][1] > solvers_time[j][1]):
-					y3.append(float(0))
-				else:
-					y3.append(float(solvers_time[i][0] <= solvers_time[j][0]))
-		
+				y3.append(float(solvers_time[i] <= solvers_time[j]))
+
 		y3 = asarray(y3)
 
 		return y3

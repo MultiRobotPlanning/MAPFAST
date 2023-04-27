@@ -1,15 +1,15 @@
 import os
 import json
 
-yaml_file1 = "sample1.json"
-yaml_file2 = "sample2.json"
-yaml_file3 = "sample3.json"
+yaml_file1 = "sample.json"
+yaml_file2 = "json_files/solved_yaml_details_run3.json"
+yaml_file3 = "json_files/solved_yaml_details.json"
 map_file = "json_files/solved_map_details.json"
 agent_file = "json_files/solved_agent_details.json"
 
-yaml_file_out = "json_files/solved_yaml_details_run3.json"
-map_file_out = "json_files/solved_map_details_run3.json"
-agent_file_out = "json_files/solved_agent_details_run3.json"
+yaml_file_out = "json_files/solved_yaml_details_run4.json"
+map_file_out = "json_files/solved_map_details_run4.json"
+agent_file_out = "json_files/solved_agent_details_run4.json"
 
 yaml_details1 = json.load(open(yaml_file1))
 yaml_details2 = json.load(open(yaml_file2))
@@ -17,7 +17,7 @@ yaml_details3 = json.load(open(yaml_file3))
 map_details = json.load(open(map_file))
 agent_details = json.load(open(agent_file))
 
-prefix = "new_"
+# prefix = "new_"
 
 # yaml_details_out = yaml_details2.copy()
 yaml_details_out = {}
@@ -25,40 +25,30 @@ map_details_out = map_details.copy()
 agent_details_out = agent_details.copy()
 
 for key, val in map_details.items():
-    new_name = key
-    if key.startswith(prefix):
-        add_prefix = True
-        new_name = key[len(prefix):]
-    if (new_name not in yaml_details1.keys()) and (key not in yaml_details2.keys()) and (key not in yaml_details3.keys()):
+    if (key not in yaml_details1.keys()) and (key not in yaml_details2.keys()):
         map_details_out.pop(key)
         agent_details_out.pop(key)
         continue
-    run_details1 = yaml_details1[new_name]
-    run_details2 = yaml_details2[key]
-    run_details3 = yaml_details3[key]
-    # if (run_details1["ECBS"] == -1 and run_details1["EECBS"] == -1 and run_details1["PBS"] == -1 and run_details2["ECBS"] == -1 and run_details2["EECBS"] == -1 and run_details2["LNS"] == -1 and run_details3["ECBS"] == -1 and run_details3["EECBS"] == -1):
-    if (run_details1["PBS"] == -1 and run_details2["LNS"] == -1 and run_details3["ECBS"] == -1 and run_details3["EECBS"] == -1):
-        # yaml_details_out.pop(new_name)
-        map_details_out.pop(key)
-        agent_details_out.pop(key)    
-        continue
+    run_details1 = -1 if (yaml_details1.get(key,-1) == -1) else yaml_details1[key]
+    cost_this = -1 if (run_details1 == -1) else run_details1["cost"]
+    run_details2 = {} if (yaml_details2.get(key,-1) == -1) else yaml_details2[key]
+    run_details3 = {} if (cost_this == -1 or yaml_details3.get(key,-1) == -1) else yaml_details3[key]
     run_details = {}
-    # run_details["ECBS1_2"] = run_details1["ECBS"]
-    # run_details["ECBS1_2_cost"] = run_details1["ecbs_cost"]
-    # run_details["EECBS1_2"] = run_details1["EECBS"]
-    # run_details["EECBS1_2_cost"] = run_details1["eecbs_cost"]
-    run_details["PBS"] = run_details1["PBS"]
-    run_details["PBS_cost"] = run_details1["pbs_cost"]
-    # run_details["ECBS1_1"] = run_details2["ECBS"]
-    # run_details["ECBS1_1_cost"] = run_details2["ecbs_cost"]
-    # run_details["EECBS1_1"] = run_details2["EECBS"]
-    # run_details["EECBS1_1_cost"] = run_details2["eecbs_cost"]
-    run_details["LNS"] = run_details2["LNS"]
-    run_details["LNS_cost"] = run_details2["lns_cost"]
-    run_details["ECBS1_02"] = run_details3["ECBS"]
-    run_details["ECBS1_02_cost"] = run_details3["ecbs_cost"]
-    run_details["EECBS1_02"] = run_details3["EECBS"]
-    run_details["EECBS1_02_cost"] = run_details3["eecbs_cost"]
+    
+    run_details["BCP"] = run_details3.get("BCP",-1)
+    run_details["BCP_cost"] = -1 if (run_details["BCP"] == -1) else cost_this
+    run_details["CBS"] = run_details3.get("CBS",-1)
+    run_details["CBS_cost"] = -1 if (run_details["CBS"] == -1) else cost_this
+    run_details["CBSH"] = run_details3.get("CBSH",-1)
+    run_details["CBSH_cost"] = -1 if (run_details["CBSH"] == -1) else cost_this
+    run_details["PBS"] = run_details2.get("PBS",-1)
+    run_details["PBS_cost"] = run_details2.get("PBS_cost",-1)
+    run_details["LNS"] = run_details2.get("LNS",-1)
+    run_details["LNS_cost"] = run_details2.get("LNS_cost",-1)
+    run_details["ECBS1_02"] = run_details2.get("ECBS1_02",-1)
+    run_details["ECBS1_02_cost"] = run_details2.get("ECBS1_02_cost",-1)
+    run_details["EECBS1_02"] = run_details2.get("EECBS1_02",-1)
+    run_details["EECBS1_02_cost"] = run_details2.get("EECBS1_02_cost",-1)
 
     # costs = {}
     least_cost = float('inf')
