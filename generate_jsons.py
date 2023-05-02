@@ -3,17 +3,15 @@ import json
 
 yaml_file1 = "sample.json"
 yaml_file2 = "json_files/solved_yaml_details_run3.json"
-yaml_file3 = "json_files/solved_yaml_details.json"
 map_file = "json_files/solved_map_details.json"
 agent_file = "json_files/solved_agent_details.json"
 
-yaml_file_out = "json_files/solved_yaml_details_run4.json"
-map_file_out = "json_files/solved_map_details_run4.json"
-agent_file_out = "json_files/solved_agent_details_run4.json"
+yaml_file_out = "json_files/solved_yaml_details_run5.json"
+map_file_out = "json_files/solved_map_details_run5.json"
+agent_file_out = "json_files/solved_agent_details_run5.json"
 
 yaml_details1 = json.load(open(yaml_file1))
 yaml_details2 = json.load(open(yaml_file2))
-yaml_details3 = json.load(open(yaml_file3))
 map_details = json.load(open(map_file))
 agent_details = json.load(open(agent_file))
 
@@ -29,18 +27,14 @@ for key, val in map_details.items():
         map_details_out.pop(key)
         agent_details_out.pop(key)
         continue
-    run_details1 = -1 if (yaml_details1.get(key,-1) == -1) else yaml_details1[key]
-    cost_this = -1 if (run_details1 == -1) else run_details1["cost"]
+    run_details1 = {} if (yaml_details1.get(key,-1) == -1) else yaml_details1[key]
     run_details2 = {} if (yaml_details2.get(key,-1) == -1) else yaml_details2[key]
-    run_details3 = {} if (cost_this == -1 or yaml_details3.get(key,-1) == -1) else yaml_details3[key]
     run_details = {}
     
-    run_details["BCP"] = run_details3.get("BCP",-1)
-    run_details["BCP_cost"] = -1 if (run_details["BCP"] == -1) else cost_this
-    run_details["CBS"] = run_details3.get("CBS",-1)
-    run_details["CBS_cost"] = -1 if (run_details["CBS"] == -1) else cost_this
-    run_details["CBSH"] = run_details3.get("CBSH",-1)
-    run_details["CBSH_cost"] = -1 if (run_details["CBSH"] == -1) else cost_this
+    run_details["BCP"] = run_details1.get("BCP",-1)
+    run_details["BCP_cost"] = run_details1.get("BCP_cost",-1)
+    run_details["CBSH"] = run_details1.get("CBSH",-1)
+    run_details["CBSH_cost"] = run_details1.get("cbsh_cost",-1)
     run_details["PBS"] = run_details2.get("PBS",-1)
     run_details["PBS_cost"] = run_details2.get("PBS_cost",-1)
     run_details["LNS"] = run_details2.get("LNS",-1)

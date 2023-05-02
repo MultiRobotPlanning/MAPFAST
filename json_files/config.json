@@ -1,8 +1,8 @@
 {
 	"Training":{
-		"yaml_details": "json_files/solved_yaml_details_run4.json",
-		"agent_details": "json_files/solved_agent_details_run4.json",
-		"map_details": "json_files/solved_map_details_run4.json",
+		"yaml_details": "json_files/solved_yaml_details_run5.json",
+		"agent_details": "json_files/solved_agent_details_run5.json",
+		"map_details": "json_files/solved_map_details_run5.json",
 		"test_details": "",
 		"augmentation": 1,
 		"batch_size": 20,
@@ -13,12 +13,12 @@
 		"output_units": {"cl": 1, "fin": 1, "pair": 1},
 		"model_loc": "model_weights/",
 		"model_name": "sp_320_14_units",
-		"mapping": {"BCP":0, "CBS":1, "PBS":2, "CBSH":3, "LNS":4, "ECBS1_02":5, "EECBS1_02":6}
+		"mapping": {"BCP":0, "PBS":1, "CBSH":2, "LNS":3, "ECBS1_02":4, "EECBS1_02":5}
 	},
 	"Testing":{
-		"yaml_details": "json_files/solved_yaml_details_run4.json",
-		"agent_details": "json_files/solved_agent_details_run4.json",
-		"map_details": "json_files/solved_map_details_run4.json",
+		"yaml_details": "json_files/solved_yaml_details_run5.json",
+		"agent_details": "json_files/solved_agent_details_run5.json",
+		"map_details": "json_files/solved_map_details_run5.json",
 		"test_details": "",
 		"augmentation": 1,
 		"batch_size": 24,
@@ -28,13 +28,13 @@
 		"model_loc": "model_weights/",
 		"model_name": "model_sp_320_14_units_epoch_9.pth",
 		"prediction_output": "json_files/y_pred_true_sp_320_14.json",
-		"mapping": {"BCP":0, "CBS":1, "PBS":2, "CBSH":3, "LNS":4, "ECBS1_02":5, "EECBS1_02":6}
+		"mapping": {"BCP":0, "PBS":1, "CBSH":2, "LNS":3, "ECBS1_02":4, "EECBS1_02":5}
 	},
 	"Analysis":{
-		"yaml_details": "json_files/solved_yaml_details_run4.json",
-		"agent_details": "json_files/solved_agent_details_run4.json",
-		"map_details": "json_files/solved_map_details_run4.json",
+		"yaml_details": "json_files/solved_yaml_details_run5.json",
+		"agent_details": "json_files/solved_agent_details_run5.json",
+		"map_details": "json_files/solved_map_details_run5.json",
 		"prediction_output": "json_files/y_pred_true_sp_320_14.json",
-		"mapping": {"BCP":0, "CBS":1, "PBS":2, "CBSH":3, "LNS":4, "ECBS1_02":5, "EECBS1_02":6}
+		"mapping": {"BCP":0, "PBS":1, "CBSH":2, "LNS":3, "ECBS1_02":4, "EECBS1_02":5}
 	}
 }
